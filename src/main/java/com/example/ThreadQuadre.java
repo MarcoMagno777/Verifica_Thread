@@ -15,6 +15,8 @@ public class ThreadQuadre extends Thread{
 
     }
 
+    //Controlla il segno per crearne un thread dedicato 
+
     @Override
     public void run() {
   

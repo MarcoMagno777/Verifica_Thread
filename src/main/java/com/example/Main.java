@@ -3,6 +3,10 @@ package com.example;
 public class Main {
     public static void main(String[] args) {
         
+        //Creazione e esecuzione dei thread per moltiplicare le variabili A B e C
+        //Join serve per aspettare che i thread finiscono di eseguire
+        //Stampa i parziali per controllare che sia tutto giusto
+
         ThreadMolti threadMoltiA = new ThreadMolti(2, 6); 
         ThreadMolti threadMoltiB = new ThreadMolti(5, 4);
         ThreadMolti threadMoltiC = new ThreadMolti(3, 3);
@@ -22,9 +26,12 @@ public class Main {
             e.printStackTrace();
         }
 
-        System.out.println("Parziale: " + threadMoltiA.getRisultato());
-        System.out.println("Parziale: " + threadMoltiB.getRisultato());
-        System.out.println("Parziale: " + threadMoltiC.getRisultato()); 
+        System.out.println("ParzialeA: " + threadMoltiA.getRisultato());
+        System.out.println("ParzialeB: " + threadMoltiB.getRisultato());
+        System.out.println("ParzialeC: " + threadMoltiC.getRisultato()); 
+
+
+        //Crea i thread dedicati alle tonde
 
         ThreadTonde threadTonde1 = new ThreadTonde(3, threadMoltiA.getRisultato(), "+");
         ThreadTonde threadTonde2 = new ThreadTonde(threadMoltiB.getRisultato(), 7, "-");
@@ -49,6 +56,8 @@ public class Main {
         System.out.println("ParzialeT: " + threadTonde2.getRisultatoParziale());
         System.out.println("ParzialeT: " + threadTonde3.getRisultatoParziale());
 
+        //Crea i thread dedicati alle quadre dopo aver preso i risultati dalle tonde
+
         ThreadQuadre threadQuadre = new ThreadQuadre(threadTonde2.getRisultatoParziale(), threadTonde3.getRisultatoParziale(), "+");
 
         threadQuadre.start();
@@ -59,6 +68,8 @@ public class Main {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+        //Stampa il risultato facendo l'ultima operazione direttamente nel sout
 
         System.out.println("Risultato finale: " + threadTonde1.getRisultatoParziale()*threadQuadre.getRisultatoParziale());
 
